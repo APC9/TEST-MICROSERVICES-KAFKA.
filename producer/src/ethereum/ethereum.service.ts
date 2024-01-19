@@ -8,7 +8,7 @@ export class EthereumService implements OnModuleInit {
 
   constructor(
     @Inject('ETH_SERVICE')
-    private readonly btcService: ClientKafka,
+    private readonly ethService: ClientKafka,
   ) {
     this.pricesWs = new WebSocket('wss://ws.coincap.io/prices?assets=ethereum');
 
@@ -16,7 +16,7 @@ export class EthereumService implements OnModuleInit {
       const decodedData = data.toString('utf-8');
 
       //'ETH_CONSUMER' va en el servicio del consumer -- recomendacion, user enum para las constantes
-      this.btcService.emit('ETH_CONSUMER', decodedData);
+      this.ethService.emit('ETH_CONSUMER', decodedData);
     });
 
     this.pricesWs.on('error', (error) => {
@@ -29,6 +29,6 @@ export class EthereumService implements OnModuleInit {
   }
 
   onModuleInit() {
-    this.btcService.connect();
+    this.ethService.connect();
   }
 }

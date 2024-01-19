@@ -18,6 +18,19 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
           },
         },
       },
+      {
+        name: 'ETH_SERVICE',
+        transport: Transport.KAFKA,
+        options: {
+          client: {
+            clientId: 'ETH_ID2',
+            brokers: ['localhost:9092'],
+          },
+          consumer: {
+            groupId: 'ETH_GROUP_ID2',
+          },
+        },
+      },
     ]),
   ],
   providers: [EthereumService],
